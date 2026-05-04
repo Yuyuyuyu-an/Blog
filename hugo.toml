@@ -1,0 +1,20 @@
+baseURL = 'https://yuyuyuyu-an.pages.dev/'
+locale = 'zh'
+title = '玉玉玉玉安的个人博客'
+theme = 'PaperMod'
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[[menu.main]]
+  name = "折腾记录"
+  url = "/categories/折腾记录/"
+  weight = 2
+[[menu.main]]
+  name = "关于"
+  url = "/about/"
+  weight = 2
+
+[params]
+  ShowToc = true
+  TocOpen = true

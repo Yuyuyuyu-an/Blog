@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>I黑最严厉的父亲！如何在Linux上游玩Neverness to Everness/《异环》，并使用Optiscale为Intel显卡强制打开超分辨率和插帧 | 玉玉玉玉安的个人博客</title>
+<meta name="keywords" content="Linux, Gaming, Intel GPU">
+<meta name="description" content="最近看到很多关于这款新游戏的讨论，我也是非常想要一款城市题材的开放世界游戏，实现我在游戏中搭乘地铁和公交车的愿望，然而这款游戏并没有Linux支持，在我安装好后，发现这款游戏竟不对Intel显卡开放任何超分辨率和帧生成功能，参照很多教程后，我摸索出了在我这里成功工作的方法，遂写一篇文章，也是给自己一个备忘。
+风险声明
+
+本文所介绍到的方法可能具有时效性。
+重要：在继续阅读之前，请务必认清以下事实。
+
+本文介绍到的dwproton可能涉及绕过反作弊的补丁。
+OptiScaler涉及注入DLL行为，”外挂“常常使用类似的手段，虽然OptiScaler的目的并非作弊，而是获得更好的视觉体验。但依然不排除此行为被视为作弊的可能。
+您的账号属于Perfect World，我无法担保本文介绍的行为不会被禁止，乃至因此被封禁账号。请谨慎行事，特别是当你的账号内有大额充值时。如果您因此遭受了处罚，请通过关于里的联系方式联系我，我会更新这篇博客。
+
+
+本教材属于典型的“黑盒折腾”，本人并不能完全理解这中间的原理是什么，也不保证会不会因为运行环境的差异导致失败，也请比较懂的大佬多加指点与斧正。
+本文所描述方法仅在本人所用环境下测试过，下面是我的fastfetch输出
+
+
+fastfetch
+         .&#39;;:cccccccccccc:;,.             ------------------
+      .;cccccccccccccccccccccc;.          OS: Fedora Linux 44 (KDE Plasma Desktop Edition) x86_64
+    .:cccccccccccccccccccccccccc:.        Host: AB-B760M D2H
+  .;ccccccccccccc;.:dddl:.;ccccccc;.      Kernel: Linux 6.19.14-300.fc44.x86_64
+ .:ccccccccccccc;OWMKOOXMWd;ccccccc:.     Uptime: 7 hours, 28 mins
+.:ccccccccccccc;KMMc;cc;xMMc;ccccccc:.    Packages: 3217 (rpm), 8 (flatpak)
+,cccccccccccccc;MMM.;cc;;WW:;cccccccc,    Shell: bash 5.3.9
+:cccccccccccccc;MMM.;cccccccccccccccc:    Display (H28F31Z): 3840x2160 @ 1.25x in 28&#34;, 60 Hz [External]
+:ccccccc;oxOOOo;MMM000k.;cccccccccccc:    DE: KDE Plasma 6.6.4
+cccccc;0MMKxdd:;MMMkddc.;cccccccccccc;    WM: KWin (Wayland)
+ccccc;XMO&#39;;cccc;MMM.;cccccccccccccccc&#39;    WM Theme: Breeze 微风
+ccccc;MMo;ccccc;MMW.;ccccccccccccccc;     Theme: Breeze (Dark) [Qt], Breeze-Dark [GTK2], Breeze [GTK3]
+ccccc;0MNc.ccc.xMMd;ccccccccccccccc;      Icons: breeze-dark [Qt], breeze-dark [GTK2/3/4]
+cccccc;dNMWXXXWM0:;cccccccccccccc:,       Font: Noto Sans (10pt) [Qt], Noto Sans (10pt) [GTK2/3/4]
+cccccccc;.:odl:.;cccccccccccccc:,.        Cursor: breeze (24px)
+ccccccccccccccccccccccccccccc:&#39;.          Terminal: konsole 26.4.0
+:ccccccccccccccccccccccc:;,..             CPU: 12th Gen Intel(R) Core(TM) i5-12600KF (16) @ 4.90 GHz
+ &#39;:cccccccccccccccc::;,.                  GPU: Intel Arc A750 @ 2.40 GHz [Discrete]
+                                          Memory: 12.79 GiB / 31.16 GiB (41%)
+                                          Swap: 2.97 GiB / 40.00 GiB (7%)
+                                          Disk (/): 653.21 GiB / 896.93 GiB (73%) - btrfs
+                                          Local IP (enp6s0): 192.168.1.2/24
+                                          Locale: zh_CN.UTF-8                                                            
+                                          
+
+安装游戏
+经过本人测试，只有dwproton可以安装游戏，其它版本的Proton可能在安装游戏过程中无法选择路径，或被Anti-Cheat Expert阻止。接下来我将使用Lutris和ProtonPlus来图形化安装。">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/nte-on-linux/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b372bdfa0a9c89610394dd0a6f8e1ade7f504ba009ec052111aca2d50fd7c3a2.css" integrity="sha256-s3K9&#43;gqciWEDlN0Kb44a3n9QS6AJ7AUhEayi1Q/Xw6I=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/nte-on-linux/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="玉玉玉玉安的个人博客 (Alt + H)">玉玉玉玉安的个人博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/about/" title="关于">
+                    <span>关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/" title="折腾记录">
+                    <span>折腾记录</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      I黑最严厉的父亲！如何在Linux上游玩Neverness to Everness/《异环》，并使用Optiscale为Intel显卡强制打开超分辨率和插帧
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-05-04 00:41:23 +0800 CST'>May 4, 2026</span>
+
+</div>
+  </header> <details class="toc"  open>
+    <summary accesskey="c" title="(Alt + C)">
+        <span class="title">目录</span>
+    </summary>
+
+    <div class="inner"><ul>
+            <li>
+                <a href="#%e9%a3%8e%e9%99%a9%e5%a3%b0%e6%98%8e" aria-label="风险声明">风险声明</a></li>
+            <li>
+                <a href="#%e5%ae%89%e8%a3%85%e6%b8%b8%e6%88%8f" aria-label="安装游戏">安装游戏</a></li>
+            <li>
+                <a href="#%e5%ae%89%e8%a3%85optiscaler%e4%bb%a5%e5%bc%ba%e5%88%b6%e6%94%af%e6%8c%81%e8%b6%85%e5%88%86%e8%be%a8%e7%8e%87%e5%92%8c%e6%8f%92%e5%b8%a7" aria-label="安装OptiScaler以强制支持超分辨率和插帧">安装OptiScaler以强制支持超分辨率和插帧</a>
+            </li>
+        </ul>
+    </div>
+</details>
+
+  <div class="post-content md-content"><p>最近看到很多关于这款新游戏的讨论，我也是非常想要一款城市题材的开放世界游戏，实现我在游戏中搭乘地铁和公交车的愿望，然而这款游戏并没有Linux支持，在我安装好后，发现这款游戏竟不对Intel显卡开放任何超分辨率和帧生成功能，参照很多教程后，我摸索出了在我这里成功工作的方法，遂写一篇文章，也是给自己一个备忘。</p>
+<h1 id="风险声明">风险声明<a hidden class="anchor" aria-hidden="true" href="#风险声明">#</a></h1>
+<ul>
+<li>本文所介绍到的方法可能具有时效性。</li>
+<li><strong>重要：在继续阅读之前，请务必认清以下事实</strong>。
+<ul>
+<li>本文介绍到的dwproton可能涉及绕过反作弊的补丁。</li>
+<li>OptiScaler涉及注入DLL行为，”外挂“常常使用类似的手段，虽然OptiScaler的目的并非作弊，而是获得更好的视觉体验。但依然不排除此行为被视为作弊的可能。</li>
+<li>您的账号属于Perfect World，我无法担保本文介绍的行为不会被禁止，乃至因此被<strong>封禁账号</strong>。请谨慎行事，特别是当你的账号内有大额充值时。如果您因此遭受了处罚，请通过关于里的联系方式联系我，我会更新这篇博客。</li>
+</ul>
+</li>
+<li>本教材属于典型的“<strong>黑盒折腾</strong>”，本人并不能完全理解这中间的原理是什么，也不保证会不会因为运行环境的差异导致失败，也请比较懂的大佬多加指点与斧正。</li>
+<li>本文所描述方法仅在本人所用环境下测试过，下面是我的fastfetch输出</li>
+</ul>
+<details>
+<summary>fastfetch</summary>
+<pre tabindex="0"><code class="language-.',;::::;,'." data-lang=".',;::::;,'.">         .&#39;;:cccccccccccc:;,.             ------------------
+      .;cccccccccccccccccccccc;.          OS: Fedora Linux 44 (KDE Plasma Desktop Edition) x86_64
+    .:cccccccccccccccccccccccccc:.        Host: AB-B760M D2H
+  .;ccccccccccccc;.:dddl:.;ccccccc;.      Kernel: Linux 6.19.14-300.fc44.x86_64
+ .:ccccccccccccc;OWMKOOXMWd;ccccccc:.     Uptime: 7 hours, 28 mins
+.:ccccccccccccc;KMMc;cc;xMMc;ccccccc:.    Packages: 3217 (rpm), 8 (flatpak)
+,cccccccccccccc;MMM.;cc;;WW:;cccccccc,    Shell: bash 5.3.9
+:cccccccccccccc;MMM.;cccccccccccccccc:    Display (H28F31Z): 3840x2160 @ 1.25x in 28&#34;, 60 Hz [External]
+:ccccccc;oxOOOo;MMM000k.;cccccccccccc:    DE: KDE Plasma 6.6.4
+cccccc;0MMKxdd:;MMMkddc.;cccccccccccc;    WM: KWin (Wayland)
+ccccc;XMO&#39;;cccc;MMM.;cccccccccccccccc&#39;    WM Theme: Breeze 微风
+ccccc;MMo;ccccc;MMW.;ccccccccccccccc;     Theme: Breeze (Dark) [Qt], Breeze-Dark [GTK2], Breeze [GTK3]
+ccccc;0MNc.ccc.xMMd;ccccccccccccccc;      Icons: breeze-dark [Qt], breeze-dark [GTK2/3/4]
+cccccc;dNMWXXXWM0:;cccccccccccccc:,       Font: Noto Sans (10pt) [Qt], Noto Sans (10pt) [GTK2/3/4]
+cccccccc;.:odl:.;cccccccccccccc:,.        Cursor: breeze (24px)
+ccccccccccccccccccccccccccccc:&#39;.          Terminal: konsole 26.4.0
+:ccccccccccccccccccccccc:;,..             CPU: 12th Gen Intel(R) Core(TM) i5-12600KF (16) @ 4.90 GHz
+ &#39;:cccccccccccccccc::;,.                  GPU: Intel Arc A750 @ 2.40 GHz [Discrete]
+                                          Memory: 12.79 GiB / 31.16 GiB (41%)
+                                          Swap: 2.97 GiB / 40.00 GiB (7%)
+                                          Disk (/): 653.21 GiB / 896.93 GiB (73%) - btrfs
+                                          Local IP (enp6s0): 192.168.1.2/24
+                                          Locale: zh_CN.UTF-8                                                            
+                                          
+</code></pre></details>
+<h1 id="安装游戏">安装游戏<a hidden class="anchor" aria-hidden="true" href="#安装游戏">#</a></h1>
+<p>经过本人测试，只有dwproton可以安装游戏，其它版本的Proton可能在安装游戏过程中无法选择路径，或被Anti-Cheat Expert阻止。接下来我将使用Lutris和ProtonPlus来图形化安装。</p>
+<ol>
+<li>
+<p>先前准备：安装<a href="https://lutris.net/downloads">Lutris</a>和<a href="https://protonplus.vysp3r.com/">ProtonPlus</a>以图形化配置，当然最重要的是下载<a href="https://nte.perfectworld.com">Neverness to Everness</a>的安装程序。</p>
+</li>
+<li>
+<p>在ProtonPlus中，选择运行器，在右上角将应用改成Lutris，在Proton中找到DW-Proton，安装dwproton-10.0-26（截止本文发布，还没有更新的版本，或许当更新的版本发布时也可以）。
+<img alt="ProtonPlus演示图片" loading="lazy" src="/ProtonPlus.png"></p>
+</li>
+<li>
+<p>在Lutris中，单击左上角的+添加游戏，选择手动配置游戏运行环境，然后在弹出的窗口中，填写名称，将运行环境选为Wine（运行Windows游戏）,在游戏选项中选择自己记得住的工作目录和容器目录，同一个即可，暂且将自己的主程序设为你下载的游戏启动器安装程序，在运行环境选项中选择Wine版本为dwproton-10.0-26，其他选项保持默认便可。
+<img alt="Lutris添加" loading="lazy" src="/Lutrisadd.png"><img alt="Lutris游戏选项" loading="lazy" src="/Lutrisgameoption.png"><img alt="Lutris运行环境选项" loading="lazy" src="/Lutrisenvironmentoption.png"></p>
+</li>
+<li>
+<p>点击保存，然后启动游戏，然后你应该能看到语言选择，点击OK后你应该能看到启动器安装指引，在我这里安装位置的盘符总不是C，甚至可能会显示一个我未曾映射过为主机路径的盘符，本人喜欢游戏文件就在Wine Prefix中，遂选择自定义安装，将盘符改为C。
+<img alt="游戏安装" loading="lazy" src="/nteinstallation.png"></p>
+</li>
+<li>
+<p>安装完成后，去你安装的路径里找到NTEGlobalLauncher.exe，将启动旁的三角-配置-游戏选项中的主程序改为这个文件，这样下次启动启动的就是安装好的启动器而不是安装程序了，如果你不知道Wine容器中的盘符对应主机的哪个路径，可以点击酒杯旁的三角-Wine设置，从中找到驱动器，然后你就可以看到盘符和目标文件夹的对应关系了。</p>
+</li>
+<li>
+<p>启动，并安装游戏，等待下载完成。</p>
+</li>
+<li>
+<p>在NTE启动器里点击开始游戏，我这里总会在编译着色器这一步崩溃，我尝试启用了游戏使用DX11，的确使我进入了登录界面，结果当我退出后将游戏使用DX11关闭后，竟然神奇地可以在DX12（VKD3D转译）下启动了。</p>
+</li>
+<li>
+<p>如果你对游戏的运行效率满意，就请享受吧。</p>
+<ul>
+<li>若不满意，请看下文。</li>
+</ul>
+</li>
+</ol>
+<h1 id="安装optiscaler以强制支持超分辨率和插帧">安装OptiScaler以强制支持超分辨率和插帧<a hidden class="anchor" aria-hidden="true" href="#安装optiscaler以强制支持超分辨率和插帧">#</a></h1>
+<ol>
+<li>
+<p>先前准备：在<a href="https://github.com/optiscaler/OptiScaler/releases/latest">OptiScaler的Releases中下载发布的压缩包（不是Source code）</a>。</p>
+</li>
+<li>
+<p>找到你游戏容器目录里的drive_c/users/steamuser/AppData/Local/HT/Saved_Global/Config/Windows/Engine.ini，使用文本编辑器（我使用的是kate，你也可以根据自己的习惯使用nano或vim）打开它，然后移除所有原本的文本，替换成下面这段：</p>
+</li>
+</ol>
+<pre tabindex="0"><code>[SystemSettings]
+r.FidelityFX.FSR3.UseNativeDX12=1
+r.FidelityFX.FSR3.UseRHI=0
+</code></pre><ol start="3">
+<li>
+<p>将压缩包内所有文件复制，粘贴到游戏安装路径/Neverness To Everness/Client/WindowsNoEditor/HT/Binaries/Win64/中，并赋予setup_linux.sh执行权限。</p>
+</li>
+<li>
+<p>在这个路径打开终端（也可以打开终端后cd到这个路径），然后执行./setup_linux.sh，这个配置是我测试过可用FSR 3的，如果在第一个问题中选择1，会被反作弊阻止，如果在第三个问题中选择Y，将在游戏中可用DLSS，但不支持帧生成。</p>
+</li>
+</ol>
+<pre tabindex="0"><code> ::::::::  :::::::::  ::::::::::: :::::::::::  ::::::::   ::::::::      :::     :::        :::::::::: :::::::::  
+:+:    :+: :+:    :+:     :+:         :+:     :+:    :+: :+:    :+:   :+: :+:   :+:        :+:        :+:    :+: 
+#+:    +:+ +:+    +:+     +:+         +:+     +:+        +:+         +:+   +:+  +:+        +:+        +:+    +:+ 
++#+    +:+ +#++:++#+      +#+         +#+     +#++:++#++ +#+        +#++:++#++: +#+        +#++:++#   +#++:++#:  
++#+    +#+ +#+            +#+         +#+            +#+ +#+        +#+     +#+ +#+        +#+        +#+    +#+ 
+#+#    #+# #+#            #+#         #+#     #+#    #+# #+#    #+# #+#     #+# #+#        #+#        #+#    #+# 
+ ########  ###            ###     ###########  ########   ########  ###     ### ########## ########## ###    ### 
+
+Coping is strong with this one...
+
+
+Choose a filename for OptiScaler (default is dxgi.dll):
+ [1] dxgi.dll
+ [2] winmm.dll
+ [3] version.dll
+ [4] dbghelp.dll
+ [5] d3d12.dll
+ [6] wininet.dll
+ [7] winhttp.dll
+ [8] OptiScaler.asi
+Enter 1-8 (or press Enter for default): 2
+
+Are you using an Nvidia GPU [y/N]: N
+
+Will you try to use DLSS inputs? (enables spoofing, required for DLSS FG, Reflex-&gt;AL2) [Y/n]: N
+</code></pre><ol start="5">
+<li>在配置-系统选项中，找到环境变量，添加一行，修改Key为WINEDLLOVERRIDES=winmm.dll，Valve为n,b。
+<img alt="Lutris设置环境变量" loading="lazy" src="/Lutrisenvironmentvariable.png"></li>
+</ol>
+<blockquote>
+<p>这里的PROTON_ENABLE_WAYLAND=1只是为了启用原生Wayland，可忽略</p>
+</blockquote>
+<ol start="6">
+<li>使用文本编辑器打开OptiScaler.ini，找到[Spoofing]，更改SpoofedVendorId,SpoofedDeviceId和SpoofedGPUName来将自己的显卡伪装成AMD Radeon RX 9070 XT。</li>
+</ol>
+<pre tabindex="0"><code>; -------------------------------------------------------
+; VendorID to spoof 
+; 0x10de = Nvidia | 0x8086 = Intel | 0x1002 = AMD
+; Integer value - Default (auto) is 0x10de 
+SpoofedVendorId = 0x1002
+
+; DeviceID to spoof 
+; 0x2684 = 4090 | 0xE20B = B580 | 0x7550 9070 XT
+; Integer value - Default (auto) is 0x2684 (4090)
+SpoofedDeviceId = 0xe208
+
+; Spoofed GPU name
+; NVIDIA GeForce RTX 4090 | Intel(R) Arc(TM) B580 Graphics | AMD Radeon RX 9070 XT
+; Default (auto) is NVIDIA GeForce RTX 4090
+SpoofedGPUName = AMD Radeon RX 9070 XT
+</code></pre><ol start="7">
+<li>
+<p>启动游戏，如果按下Insert后显示了OptiScaler GUI，就说明OptiScaler成功安装了。
+<img alt="游戏内OptiScaler GUI截图" loading="lazy" src="/InNTEGame1.png">
+<img alt="游戏内设置" loading="lazy" src="/NTESetting.png"></p>
+</li>
+<li>
+<p>FSR3只有NativeAA和质量档，而质量档的帧率依然不能满足我，因此我在OptiScale GUI中的Upscale Ratio Override，启用Override all，并更改All Ratios为2.000，这个值控制实际渲染画面的线性像素数与游戏窗口的线性像素数，越大越快但画面质量越低。如图，我这里为1920x1080 -&gt; 3840x2160，虽然游戏无基准测试，但是根据我的个人体验，我的Intel Arc A750在这种情况下帧率依然很难达到60fps，可见这款游戏对GPU的要求还是不低的。</p>
+</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/linux/">Linux</a></li>
+      <li><a href="http://localhost:1313/tags/gaming/">Gaming</a></li>
+      <li><a href="http://localhost:1313/tags/intel-gpu/">Intel GPU</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">玉玉玉玉安的个人博客</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
