@@ -85,6 +85,8 @@ r.FidelityFX.FSR3.UseNativeDX12=1
 r.FidelityFX.FSR3.UseRHI=0
 ```
 
+  然后移除写权限，我选择通过Dolphin的图形化界面，你也可以通过你偏好的其它工具或者chmod a-w来达成相同的效果。
+
 3. 将压缩包内所有文件复制，粘贴到游戏安装路径/Neverness To Everness/Client/WindowsNoEditor/HT/Binaries/Win64/中，并赋予setup_linux.sh执行权限。
 
 4. 在这个路径打开终端（也可以打开终端后cd到这个路径），然后执行./setup_linux.sh，这个配置是我测试过可用FSR 3的，如果在第一个问题中选择1，会被反作弊阻止，如果在第三个问题中选择Y，将在游戏中可用DLSS，但不支持帧生成。
@@ -117,7 +119,7 @@ Are you using an Nvidia GPU [y/N]: N
 Will you try to use DLSS inputs? (enables spoofing, required for DLSS FG, Reflex->AL2) [Y/n]: N
 ```
 
-5. 在配置-系统选项中，找到环境变量，添加一行，修改Key为WINEDLLOVERRIDES=winmm.dll，Valve为n,b。
+5. 在配置-系统选项中，找到环境变量，添加一行，修改Key为WINEDLLOVERRIDES=winmm.dll，Value为n,b。
 ![Lutris设置环境变量](/Lutrisenvironmentvariable.png)
 > 这里的PROTON_ENABLE_WAYLAND=1只是为了启用原生Wayland，可忽略
 
