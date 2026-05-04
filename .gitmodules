@@ -1,6 +1,3 @@
-[submodule "themes/ananke"]
-	path = themes/ananke
-	url = git@github.com:gohugo-ananke/ananke.git
-[submodule "themes/PaperrMMod"]
-	path = themes/PaperrMMod
+[submodule "themes/PaperMod"]
+	path = themes/PaperMod
 	url = git@github.com:adityatelange/hugo-PaperMod.git
