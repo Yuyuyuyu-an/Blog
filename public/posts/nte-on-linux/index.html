@@ -267,7 +267,8 @@ ccccccccccccccccccccccccccccc:&#39;.          Terminal: konsole 26.4.0
 <pre tabindex="0"><code>[SystemSettings]
 r.FidelityFX.FSR3.UseNativeDX12=1
 r.FidelityFX.FSR3.UseRHI=0
-</code></pre><ol start="3">
+</code></pre><p>然后移除写权限，我选择通过Dolphin的图形化界面，你也可以通过你偏好的其它工具或者chmod a-w来达成相同的效果。</p>
+<ol start="3">
 <li>
 <p>将压缩包内所有文件复制，粘贴到游戏安装路径/Neverness To Everness/Client/WindowsNoEditor/HT/Binaries/Win64/中，并赋予setup_linux.sh执行权限。</p>
 </li>
@@ -301,7 +302,7 @@ Are you using an Nvidia GPU [y/N]: N
 
 Will you try to use DLSS inputs? (enables spoofing, required for DLSS FG, Reflex-&gt;AL2) [Y/n]: N
 </code></pre><ol start="5">
-<li>在配置-系统选项中，找到环境变量，添加一行，修改Key为WINEDLLOVERRIDES=winmm.dll，Valve为n,b。
+<li>在配置-系统选项中，找到环境变量，添加一行，修改Key为WINEDLLOVERRIDES=winmm.dll，Value为n,b。
 <img alt="Lutris设置环境变量" loading="lazy" src="/Lutrisenvironmentvariable.png"></li>
 </ol>
 <blockquote>

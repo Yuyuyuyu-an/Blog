@@ -146,4 +146,4 @@ SpoofedGPUName = AMD Radeon RX 9070 XT
 ![游戏内OptiScaler GUI截图](/InNTEGame1.png)
 ![游戏内设置](/NTESetting.png)
 
-8. FSR3只有NativeAA和质量档，而质量档的帧率依然不能满足我，因此我在OptiScale GUI中的Upscale Ratio Override，启用Override all，并更改All Ratios为2.000，这个值控制实际渲染画面的线性像素数与游戏窗口的线性像素数，越大越快但画面质量越低。如图，我这里为1920x1080 -> 3840x2160，虽然游戏无基准测试，但是根据我的个人体验，我的Intel Arc A750在这种情况下帧率依然很难达到60fps，可见这款游戏对GPU的要求还是不低的。
+8. FSR3只有NativeAA和质量档，而质量档的帧率依然不能满足我，因此我在OptiScale GUI中的Upscale Ratio Override，启用Override all，并更改All Ratios为2.000，这个值控制实际渲染画面的线性像素数与游戏窗口的线性像素数，越大越快但画面质量越低，更改后需要重启才能生效。如图，我这里为1920x1080 -> 3840x2160，虽然游戏无基准测试，但是根据我的个人体验，我的Intel Arc A750在这种情况下帧率依然很难达到60fps，可见这款游戏对GPU的要求还是不低的。
