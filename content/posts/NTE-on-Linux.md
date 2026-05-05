@@ -1,13 +1,13 @@
 +++
 date = '2026-05-04T00:41:23+08:00'
 draft = false
-title = 'I黑最严厉的父亲！如何在Linux上游玩Neverness to Everness/《异环》，并使用Optiscale为Intel显卡强制打开超分辨率和插帧'
+title = 'I黑最严厉的父亲！如何在Linux上游玩《异环》，并使用Optiscale为Intel显卡强制打开超分辨率和插帧'
 categories = ["折腾记录"]
 tags = ["Linux", "Gaming", "Intel GPU"]
 +++
 
-最近看到很多关于这款新游戏的讨论，我也是非常想要一款城市题材的开放世界游戏，实现我在游戏中搭乘地铁和公交车的愿望，然而这款游戏并没有Linux支持，在我安装好后，发现这款游戏竟不对Intel显卡开放任何超分辨率和帧生成功能，参照很多教程后，我摸索出了在我这里成功工作的方法，遂写一篇文章，也是给自己一个备忘。
-# 风险声明
+最近看到很多关于Neverness To Everness/《异环》的讨论，我也是非常想要一款城市题材的开放世界游戏，实现我在游戏中搭乘地铁和公交车的愿望，然而这款游戏并没有Linux支持，在我安装好后，发现这款游戏竟不对Intel显卡开放任何超分辨率和帧生成功能，参照很多教程后，我摸索出了在我这里成功工作的方法，遂写一篇文章，也是给自己一个备忘。
+## 风险声明
 - 本文所介绍到的方法可能具有时效性。
 - **重要：在继续阅读之前，请务必认清以下事实**。
   - 本文介绍到的dwproton可能涉及绕过反作弊的补丁。
@@ -50,7 +50,7 @@ ccccccccccccccccccccccccccccc:'.          Terminal: konsole 26.4.0
 
 
 
-# 安装游戏
+## 安装游戏
 
 经过本人测试，只有dwproton可以安装游戏，其它版本的Proton可能在安装游戏过程中无法选择路径，或被Anti-Cheat Expert阻止。接下来我将使用Lutris和ProtonPlus来图形化安装。
 1. 先前准备：安装[Lutris](https://lutris.net/downloads)和[ProtonPlus](https://protonplus.vysp3r.com/)以图形化配置，当然最重要的是下载[Neverness to Everness](https://nte.perfectworld.com)的安装程序。
@@ -73,7 +73,7 @@ ccccccccccccccccccccccccccccc:'.          Terminal: konsole 26.4.0
 8. 如果你对游戏的运行效率满意，就请享受吧。
    - 若不满意，请看下文。
 
-# 安装OptiScaler以强制支持超分辨率和插帧
+## 安装OptiScaler以强制支持超分辨率和插帧
 
 1. 先前准备：在[OptiScaler的Releases中下载发布的压缩包（不是Source code）](https://github.com/optiscaler/OptiScaler/releases/latest)。
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
+<html lang="zh" dir="auto" data-theme="auto">
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <link rel="alternate" type="application/rss+xml" href="http://localhost:1313/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/">
+<link rel="alternate" hreflang="zh" href="http://localhost:1313/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/">
 <noscript>
     <style>
         #theme-toggle,
@@ -118,18 +118,18 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">I黑最严厉的父亲！如何在Linux上游玩Neverness to Everness/《异环》，并使用Optiscale为Intel显卡强制打开超分辨率和插帧
+    <h2 class="entry-hint-parent">I黑最严厉的父亲！如何在Linux上游玩《异环》，并使用Optiscale为Intel显卡强制打开超分辨率和插帧
     </h2>
   </header>
   <div class="entry-content">
-    <p>最近看到很多关于这款新游戏的讨论，我也是非常想要一款城市题材的开放世界游戏，实现我在游戏中搭乘地铁和公交车的愿望，然而这款游戏并没有Linux支持，在我安装好后，发现这款游戏竟不对Intel显卡开放任何超分辨率和帧生成功能，参照很多教程后，我摸索出了在我这里成功工作的方法，遂写一篇文章，也是给自己一个备忘。
+    <p>最近看到很多关于Neverness To Everness/《异环》的讨论，我也是非常想要一款城市题材的开放世界游戏，实现我在游戏中搭乘地铁和公交车的愿望，然而这款游戏并没有Linux支持，在我安装好后，发现这款游戏竟不对Intel显卡开放任何超分辨率和帧生成功能，参照很多教程后，我摸索出了在我这里成功工作的方法，遂写一篇文章，也是给自己一个备忘。
 风险声明 本文所介绍到的方法可能具有时效性。 重要：在继续阅读之前，请务必认清以下事实。 本文介绍到的dwproton可能涉及绕过反作弊的补丁。 OptiScaler涉及注入DLL行为，”外挂“常常使用类似的手段，虽然OptiScaler的目的并非作弊，而是获得更好的视觉体验。但依然不排除此行为被视为作弊的可能。 您的账号属于Perfect World，我无法担保本文介绍的行为不会被禁止，乃至因此被封禁账号。请谨慎行事，特别是当你的账号内有大额充值时。如果您因此遭受了处罚，请通过关于里的联系方式联系我，我会更新这篇博客。 本教材属于典型的“黑盒折腾”，本人并不能完全理解这中间的原理是什么，也不保证会不会因为运行环境的差异导致失败，也请比较懂的大佬多加指点与斧正。 本文所描述方法仅在本人所用环境下测试过，下面是我的fastfetch输出 fastfetch .&#39;;:cccccccccccc:;,. ------------------ .;cccccccccccccccccccccc;. OS: Fedora Linux 44 (KDE Plasma Desktop Edition) x86_64 .:cccccccccccccccccccccccccc:. Host: AB-B760M D2H .;ccccccccccccc;.:dddl:.;ccccccc;. Kernel: Linux 6.19.14-300.fc44.x86_64 .:ccccccccccccc;OWMKOOXMWd;ccccccc:. Uptime: 7 hours, 28 mins .:ccccccccccccc;KMMc;cc;xMMc;ccccccc:. Packages: 3217 (rpm), 8 (flatpak) ,cccccccccccccc;MMM.;cc;;WW:;cccccccc, Shell: bash 5.3.9 :cccccccccccccc;MMM.;cccccccccccccccc: Display (H28F31Z): 3840x2160 @ 1.25x in 28&#34;, 60 Hz [External] :ccccccc;oxOOOo;MMM000k.;cccccccccccc: DE: KDE Plasma 6.6.4 cccccc;0MMKxdd:;MMMkddc.;cccccccccccc; WM: KWin (Wayland) ccccc;XMO&#39;;cccc;MMM.;cccccccccccccccc&#39; WM Theme: Breeze 微风 ccccc;MMo;ccccc;MMW.;ccccccccccccccc; Theme: Breeze (Dark) [Qt], Breeze-Dark [GTK2], Breeze [GTK3] ccccc;0MNc.ccc.xMMd;ccccccccccccccc; Icons: breeze-dark [Qt], breeze-dark [GTK2/3/4] cccccc;dNMWXXXWM0:;cccccccccccccc:, Font: Noto Sans (10pt) [Qt], Noto Sans (10pt) [GTK2/3/4] cccccccc;.:odl:.;cccccccccccccc:,. Cursor: breeze (24px) ccccccccccccccccccccccccccccc:&#39;. Terminal: konsole 26.4.0 :ccccccccccccccccccccccc:;,.. CPU: 12th Gen Intel(R) Core(TM) i5-12600KF (16) @ 4.90 GHz &#39;:cccccccccccccccc::;,. GPU: Intel Arc A750 @ 2.40 GHz [Discrete] Memory: 12.79 GiB / 31.16 GiB (41%) Swap: 2.97 GiB / 40.00 GiB (7%) Disk (/): 653.21 GiB / 896.93 GiB (73%) - btrfs Local IP (enp6s0): 192.168.1.2/24 Locale: zh_CN.UTF-8 安装游戏 经过本人测试，只有dwproton可以安装游戏，其它版本的Proton可能在安装游戏过程中无法选择路径，或被Anti-Cheat Expert阻止。接下来我将使用Lutris和ProtonPlus来图形化安装。
 ...</p>
   </div>
   <footer class="entry-footer">
 
-<span title='2026-05-04 00:41:23 +0800 CST'>May 4, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to I黑最严厉的父亲！如何在Linux上游玩Neverness to Everness/《异环》，并使用Optiscale为Intel显卡强制打开超分辨率和插帧" href="http://localhost:1313/posts/nte-on-linux/"></a>
+<span title='2026-05-04 00:41:23 +0800 CST'>2026年5月4日</span></footer>
+  <a class="entry-link" aria-label="post link to I黑最严厉的父亲！如何在Linux上游玩《异环》，并使用Optiscale为Intel显卡强制打开超分辨率和插帧" href="http://localhost:1313/posts/nte-on-linux/"></a>
 </article>
     </main>
     

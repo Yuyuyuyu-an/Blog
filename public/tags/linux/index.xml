@@ -9,12 +9,12 @@
     <lastBuildDate>Mon, 04 May 2026 00:41:23 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>I黑最严厉的父亲！如何在Linux上游玩Neverness to Everness/《异环》，并使用Optiscale为Intel显卡强制打开超分辨率和插帧</title>
+      <title>I黑最严厉的父亲！如何在Linux上游玩《异环》，并使用Optiscale为Intel显卡强制打开超分辨率和插帧</title>
       <link>http://localhost:1313/posts/nte-on-linux/</link>
       <pubDate>Mon, 04 May 2026 00:41:23 +0800</pubDate>
       <guid>http://localhost:1313/posts/nte-on-linux/</guid>
-      <description>&lt;p&gt;最近看到很多关于这款新游戏的讨论，我也是非常想要一款城市题材的开放世界游戏，实现我在游戏中搭乘地铁和公交车的愿望，然而这款游戏并没有Linux支持，在我安装好后，发现这款游戏竟不对Intel显卡开放任何超分辨率和帧生成功能，参照很多教程后，我摸索出了在我这里成功工作的方法，遂写一篇文章，也是给自己一个备忘。&lt;/p&gt;
-&lt;h1 id=&#34;风险声明&#34;&gt;风险声明&lt;/h1&gt;
+      <description>&lt;p&gt;最近看到很多关于Neverness To Everness/《异环》的讨论，我也是非常想要一款城市题材的开放世界游戏，实现我在游戏中搭乘地铁和公交车的愿望，然而这款游戏并没有Linux支持，在我安装好后，发现这款游戏竟不对Intel显卡开放任何超分辨率和帧生成功能，参照很多教程后，我摸索出了在我这里成功工作的方法，遂写一篇文章，也是给自己一个备忘。&lt;/p&gt;
+&lt;h2 id=&#34;风险声明&#34;&gt;风险声明&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;本文所介绍到的方法可能具有时效性。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;重要：在继续阅读之前，请务必认清以下事实&lt;/strong&gt;。
@@ -54,7 +54,7 @@ ccccccccccccccccccccccccccccc:&amp;#39;.          Terminal: konsole 26.4.0
                                           Locale: zh_CN.UTF-8                                                            
                                           
 &lt;/code&gt;&lt;/pre&gt;&lt;/details&gt;
-&lt;h1 id=&#34;安装游戏&#34;&gt;安装游戏&lt;/h1&gt;
+&lt;h2 id=&#34;安装游戏&#34;&gt;安装游戏&lt;/h2&gt;
 &lt;p&gt;经过本人测试，只有dwproton可以安装游戏，其它版本的Proton可能在安装游戏过程中无法选择路径，或被Anti-Cheat Expert阻止。接下来我将使用Lutris和ProtonPlus来图形化安装。&lt;/p&gt;</description>
     </item>
   </channel>

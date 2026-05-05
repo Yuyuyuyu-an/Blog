@@ -1,5 +1,6 @@
 baseURL = 'https://yuyuyuyu-an.pages.dev/'
-locale = 'zh'
+#locale = 'zh'
+defaultContentLanguage = 'zh'
 title = '玉玉玉玉安的个人博客'
 theme = 'PaperMod'
 
@@ -18,3 +19,7 @@ theme = 'PaperMod'
 [params]
   ShowToc = true
   TocOpen = true
+
+[params.homeInfoParams]
+  Title = "玉玉玉玉安的个人博客"
+
