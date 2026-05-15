@@ -10,7 +10,7 @@ tags = ["Linux", "Gaming", "Intel GPU"]
 ## 风险声明
 - 本文所介绍到的方法可能具有时效性。
 - **重要：在继续阅读之前，请务必认清以下事实**。
-  - 本文介绍到的dwproton可能涉及绕过反作弊的补丁。
+  - Perfect World对在Linux上游玩本游戏态度比较模糊，Valve的官方Proton分支是玩不了的，只有DW-Proton可以，且我未曾理解过DW-Proton的代码。
   - OptiScaler涉及注入DLL行为，”外挂“常常使用类似的手段，虽然OptiScaler的目的并非作弊，而是获得更好的视觉体验。但依然不排除此行为被视为作弊的可能。
   - 您的账号属于Perfect World，我无法担保本文介绍的行为不会被禁止，乃至因此被**封禁账号**。请谨慎行事，特别是当你的账号内有大额充值时。如果您因此遭受了处罚，请通过关于里的联系方式联系我，我会更新这篇博客。
 - 本教材属于典型的“**黑盒折腾**”，本人并不能完全理解这中间的原理是什么，也不保证会不会因为运行环境的差异导致失败，也请比较懂的大佬多加指点与斧正。
@@ -55,7 +55,10 @@ ccccccccccccccccccccccccccccc:'.          Terminal: konsole 26.4.0
 经过本人测试，只有dwproton可以安装游戏，其它版本的Proton可能在安装游戏过程中无法选择路径，或被Anti-Cheat Expert阻止。接下来我将使用Lutris和ProtonPlus来图形化安装。
 1. 先前准备：安装[Lutris](https://lutris.net/downloads)和[ProtonPlus](https://protonplus.vysp3r.com/)以图形化配置，当然最重要的是下载[Neverness to Everness](https://nte.perfectworld.com)的安装程序。
 
-2. 在ProtonPlus中，选择运行器，在右上角将应用改成Lutris，在Proton中找到DW-Proton，安装dwproton-10.0-26（截止本文发布，还没有更新的版本，或许当更新的版本发布时也可以）。
+2. 在ProtonPlus中，选择运行器，在右上角将应用改成Lutris，在Proton中找到DW-Proton，安装dwproton-10.0-26（2026-05-15更新：11.0-1亦可）。<details><summary>下载很慢？</summary>如果下载过程中出错，可于<https://dawn.wine/dawn-winery/dwproton/releases>手动下载，亦可选择Magnet link。下载后手动解压至`~/.local/share/lutris/runners/wine/`即可。但根据我的经验，只有Github Releases上的资源有必要手动多线程下载，DWProton使用的代码托管平台我访问起来相当快。
+
+</details>
+
 ![ProtonPlus演示图片](/ProtonPlus.png)
 
 3. 在Lutris中，单击左上角的+添加游戏，选择手动配置游戏运行环境，然后在弹出的窗口中，填写名称，将运行环境选为Wine（运行Windows游戏）,在游戏选项中选择自己记得住的工作目录和容器目录，同一个即可，暂且将自己的主程序设为你下载的游戏启动器安装程序，在运行环境选项中选择Wine版本为dwproton-10.0-26，其他选项保持默认便可。
