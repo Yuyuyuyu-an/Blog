@@ -1,25 +1,60 @@
 baseURL = 'https://yuan.pub/'
 #locale = 'zh'
-defaultContentLanguage = 'zh'
-title = '玉玉玉玉安的个人博客'
-theme = 'PaperMod'
+#defaultContentLanguage = 'zh'
+languageCode = 'zh-cn'
+title = "Yuyuyuyuan's Blog"
+theme = 'terminal'
+
+[params]
+
+  fullWidthTheme = false
+  centerTheme = true
+  autoCover = true
+  Toc = true
+  TocTitle = "目录"
 
 [markup.goldmark.renderer]
   unsafe = true
 
-[[menu.main]]
-  name = "折腾记录"
-  url = "/categories/折腾记录/"
-  weight = 2
-[[menu.main]]
-  name = "关于"
-  url = "/about/"
-  weight = 2
+#[[menu.main]]
+#  name = "折腾记录"
+#  url = "/categories/折腾记录/"
+#  weight = 2
+#[[menu.main]]
+#  name = "关于"
+#  url = "/about/"
+#  weight = 2
 
-[params]
-  ShowToc = true
-  TocOpen = true
 
 [params.homeInfoParams]
   Title = "玉玉玉玉安的个人博客"
 
+[languages]
+  [languages.zh]
+    languageName = "Zhongwen"
+    title = "玉玉玉玉安的个人博客"
+
+    [language.zh.params]
+      subtitle = "属于玉玉玉玉安的个人网站，随便写一些碎碎念"
+      menuMore = "查看更多"
+      readMore = "阅读更多"
+      readOtherPosts = "阅读其它文章"
+      newerPosts = "最新文章"
+      olderPosts = "最旧文章"
+      missingContentMessage = "页面未找到……"
+      missingBackButtonLabel = "返回首页"
+      minuteReadingTime = "阅读时间"
+      words = "词"
+
+      [languages.zh.params.logo]
+        logoText = "玉玉玉玉安的个人博客"
+        logoHomeLink = "/"
+      [language.zh.menu]
+        [[languages.zh.menu.main]]
+          identifier = "about"
+          name = "关于"
+          url = "/about"
+      [[languages.zh.menu.main]]
+          identifier = "折腾日记"
+          name = "折腾记录"
+          url = "/categories/折腾记录"
