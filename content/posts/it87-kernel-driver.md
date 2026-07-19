@@ -1,6 +1,6 @@
 +++
 date = '2026-07-19T21:36:25+08:00'
-draft = true
+draft = false
 title = '解决Linux无法驱动IT8613E导致的无法控制主板上接的风扇转速的问题记录'
 categories = ["折腾记录"]
 tags = ["Linux", "PC DIY"]
