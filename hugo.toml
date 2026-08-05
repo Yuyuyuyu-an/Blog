@@ -1,6 +1,6 @@
 baseURL = 'https://yuan.pub/'
-#locale = 'zh'
-#defaultContentLanguage = 'zh'
+#languageCode = "zh-cn"
+defaultContentLanguage = 'zh'
 languageCode = 'zh-cn'
 title = "Yuyuyuyuan's Blog"
 theme = 'terminal'
@@ -34,7 +34,7 @@ theme = 'terminal'
     languageName = "Zhongwen"
     title = "玉玉玉玉安的个人博客"
 
-    [language.zh.params]
+    [languages.zh.params]
       subtitle = "属于玉玉玉玉安的个人网站，随便写一些碎碎念"
       menuMore = "查看更多"
       readMore = "阅读更多"
